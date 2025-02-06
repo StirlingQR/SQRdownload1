@@ -131,8 +131,7 @@ if not st.session_state.submitted:
         captcha_answer = st.number_input("Answer", step=1)
         
         submitted = st.form_submit_button("Get Your Copy Now →")
-        Hello
-        
+            
         if submitted:
             valid_captcha = (captcha_answer == st.session_state.captcha['num1'] + st.session_state.captcha['num2'])
             if valid_captcha:
