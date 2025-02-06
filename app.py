@@ -15,9 +15,9 @@ st.set_page_config(
 
 # GitHub configuration
 GITHUB_USER = "StirlingQR"
-REPO_NAME = "Lead-Gen"
+REPO_NAME = "SQRdownload1"  # Changed from "Lead-Gen"
 BRANCH = "main"
-PDF_FILENAME = "Why Job Adverts Fail.pdf"
+PDF_FILENAME = "Why Job Adverts Fail.pdf"  # Verify exact filename matches your repo
 ENCODED_FILENAME = quote(PDF_FILENAME)
 PDF_URL = f"https://raw.githubusercontent.com/{GITHUB_USER}/{REPO_NAME}/{BRANCH}/{ENCODED_FILENAME}"
 
