@@ -15,9 +15,9 @@ st.set_page_config(
 
 # GitHub configuration
 GITHUB_USER = "StirlingQR"
-REPO_NAME = "SQRdownload1"  # Changed from "Lead-Gen"
+REPO_NAME = "SQRdownload1"
 BRANCH = "main"
-PDF_FILENAME = "Why Job Adverts Fail.pdf"  # Verify exact filename matches your repo
+PDF_FILENAME = "Why Job Adverts Fail.pdf"
 ENCODED_FILENAME = quote(PDF_FILENAME)
 PDF_URL = f"https://raw.githubusercontent.com/{GITHUB_USER}/{REPO_NAME}/{BRANCH}/{ENCODED_FILENAME}"
 
@@ -47,7 +47,7 @@ def display_logo():
     try:
         st.markdown("""
         <div class="logo-container">
-            <img class="logo-img" src="https://raw.githubusercontent.com/StirlingQR/Lead-Gen/main/Stirling_QR_Logo.png">
+            <img class="logo-img" src="https://raw.githubusercontent.com/StirlingQR/SQRdownload1/main/Stirling_QR_Logo.png">
         </div>
         """, unsafe_allow_html=True)
     except:
@@ -130,8 +130,14 @@ if not st.session_state.submitted:
         st.markdown(f"**CAPTCHA:** What is {st.session_state.captcha['num1']} + {st.session_state.captcha['num2']}?")
         captcha_answer = st.number_input("Answer", step=1)
         
+        # Privacy consent note
+        st.markdown("""
+        <small><i>By clicking 'Get your copy', you are agreeing to Stirling Q&R to contact you with the above information provided. 
+        For our privacy statement, please visit <a href="https://www.stirlingqr.com/privacy-policy/">https://www.stirlingqr.com/privacy-policy/</a></i></small>
+        """, unsafe_allow_html=True)
+        
         submitted = st.form_submit_button("Get Your Copy Now →")
-            
+        
         if submitted:
             valid_captcha = (captcha_answer == st.session_state.captcha['num1'] + st.session_state.captcha['num2'])
             if valid_captcha:
@@ -160,27 +166,19 @@ else:
     display_logo()
     st.title("🎉 Your Guide is Ready!")
     
-    # Get PDF content with verification
+    # Download section
     try:
         response = requests.get(PDF_URL, allow_redirects=True)
-        response.raise_for_status()  # Check for HTTP errors
+        response.raise_for_status()
         
-        # Verify PDF magic number
-        if not response.content.startswith(b'%PDF-'):
-            st.error("Invalid PDF file detected")
-            st.stop()
-            
         st.download_button(
             label="Download Guide Now",
             data=response.content,
             file_name=PDF_FILENAME,
             mime="application/pdf"
         )
-        
-    except requests.RequestException as e:
-        st.error(f"Download failed: {str(e)}")
     except Exception as e:
-        st.error(f"Unexpected error: {str(e)}")
+        st.error(f"Download failed: {str(e)}")
     
     st.markdown("""
     **Next Steps:**
