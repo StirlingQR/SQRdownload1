@@ -160,17 +160,27 @@ else:
     display_logo()
     st.title("🎉 Your Guide is Ready!")
     
-    # Download section
+    # Get PDF content with verification
     try:
-        pdf_content = requests.get(PDF_URL, allow_redirects=True).content
+        response = requests.get(PDF_URL, allow_redirects=True)
+        response.raise_for_status()  # Check for HTTP errors
+        
+        # Verify PDF magic number
+        if not response.content.startswith(b'%PDF-'):
+            st.error("Invalid PDF file detected")
+            st.stop()
+            
         st.download_button(
             label="Download Guide Now",
-            data=pdf_content,
+            data=response.content,
             file_name=PDF_FILENAME,
             mime="application/pdf"
         )
+        
+    except requests.RequestException as e:
+        st.error(f"Download failed: {str(e)}")
     except Exception as e:
-        st.error(f"Failed to load PDF: {str(e)}")
+        st.error(f"Unexpected error: {str(e)}")
     
     st.markdown("""
     **Next Steps:**
