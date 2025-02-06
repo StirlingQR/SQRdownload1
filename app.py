@@ -8,7 +8,7 @@ import requests
 
 # Configure page
 st.set_page_config(
-    page_title="Stirling Q&R Lead Generation",
+    page_title="Stirling Q&R",
     page_icon="📈",
     layout="centered"
 )
