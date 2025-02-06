@@ -17,7 +17,7 @@ st.set_page_config(
 GITHUB_USER = "StirlingQR"
 REPO_NAME = "Lead-Gen"
 BRANCH = "main"
-PDF_FILENAME = "Top 5 Considerations Before Signing an Exclusive Agency Agreement.pdf"
+PDF_FILENAME = "Why Job Adverts Fail.pdf"
 ENCODED_FILENAME = quote(PDF_FILENAME)
 PDF_URL = f"https://raw.githubusercontent.com/{GITHUB_USER}/{REPO_NAME}/{BRANCH}/{ENCODED_FILENAME}"
 
@@ -123,7 +123,7 @@ if st.session_state.logged_in:
 # Main Form
 if not st.session_state.submitted:
     display_logo()
-    st.title("Download Agency Agreement Guide")
+    st.title("Download Why Job Adverts Fail Guide")
     
     with st.form("lead_form", clear_on_submit=True):
         name = st.text_input("Full Name*")
